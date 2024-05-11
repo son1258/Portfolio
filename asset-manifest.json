@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/Portfolio/static/css/main.17c57bd0.css",
+    "main.js": "/Portfolio/static/js/main.08059c41.js",
+    "static/media/about.jpg": "/Portfolio/static/media/about.5f3f61b11ca14831b58a.jpg",
+    "static/media/profile.jpg": "/Portfolio/static/media/profile.ffd16a5f0f282aea4a8b.jpg",
+    "static/media/TSON-CV.pdf": "/Portfolio/static/media/TSON-CV.0cca0579fa238e94fd1a.pdf",
+    "index.html": "/Portfolio/index.html",
+    "main.17c57bd0.css.map": "/Portfolio/static/css/main.17c57bd0.css.map",
+    "main.08059c41.js.map": "/Portfolio/static/js/main.08059c41.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.17c57bd0.css",
+    "static/js/main.08059c41.js"
+  ]
+}
