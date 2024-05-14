@@ -1,7 +1,57 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Contact.css";
+import { useRef } from 'react';
+import emailjs from '@emailjs/browser';
+
 
 const Contact = () => {
+    const form = useRef();
+    const [ emailsSent , setEmailsSent ] = useState(0);
+
+    useEffect(() => {
+        const setCount = parseInt(localStorage.getItem('emailsSent')) || 0;
+        const lastSentTime = localStorage.getItem('lastSentTime');
+        const now = new Date();
+
+        if(lastSentTime){
+            const lastSentDate = new Date(lastSentTime);
+            //reset count if the data has change
+            if(now.toDateString() !== lastSentDate.toDateString()){
+                localStorage.setItem('emailsSent', 0);
+                setEmailsSent(0);
+            }else{
+                setEmailsSent(setCount);
+            }
+        }else{
+            setEmailsSent(setCount);
+        }
+    }, []);
+    const sendEmail = (e) => {
+        e.preventDefault();
+
+        const setCount = parseInt(localStorage.getItem('emailsSent')) || 0;
+        // limit sending emails use localStorage
+        if(setCount >= 5){ 
+            alert("You have reached the daily limit sending emails");
+            return;
+        }
+    emailjs
+      .sendForm('service_vej1ku5', 'template_oc9nzgh', form.current, {
+        publicKey: 'cWK_EvZU_5AuaVkKE',
+      })
+      .then(
+        () => {
+          console.log('SUCCESS!');
+          const newCount = setCount + 1;
+          localStorage.setItem('emailsSent', newCount);
+          localStorage.setItem('lastSendTime', new Date().toDateString());
+          setEmailsSent(newCount); 
+        },
+        (error) => {
+          console.log('FAILED...', error.text);
+        },
+      );
+  };
     return(
         <section className="contact section" id="contact">
             <h2 className="section__title">Get in touch</h2>
@@ -36,38 +86,44 @@ const Contact = () => {
 
                 <div className="contact__content">
                     <h3 className="contact__title">Write me your porject</h3>
-                    <form className="contact__form">
+                    <form ref={form} onSubmit={sendEmail} 
+                    className="contact__form" id="contact-form">
                         <div className="contact__form-div">
-                            <label className="contact__form-tag">Name</label>
+                            <label className="contact__form-tag" for="name">Name</label>   
                             <input
                                 type="text"
                                 name="name"
+                                id="name"
                                 className="contact__form-input"
                                 placeholder="Insert your name" 
+                                autoComplete="name"
                             />
                         </div>
 
                         <div className="contact__form-div">
-                            <label className="contact__form-tag">Mail</label>
+                            <label className="contact__form-tag" for="email">Mail</label>
                             <input
                                 type="email"
                                 name="email"
+                                id="email"
                                 className="contact__form-input"
                                 placeholder="Insert your email" 
+                                autoComplete="email"
                             />
                         </div>
 
                         <div className="contact__form-div contact__form-area">
-                            <label className="contact__form-tag">Project</label>
+                            <label className="contact__form-tag" for="project">Project</label>
                             <textarea 
                                 name="project" 
+                                id="project"
                                 cols="30" 
                                 rows="10"
                                 className="contact__form-input"
                                 placeholder="Write your project"
                             ></textarea>
                         </div>
-                        <button  className="button button--flex">
+                        <button  className="button button--flex" type="submit">
                             Send Message
                             <svg
                   class="button__icon"

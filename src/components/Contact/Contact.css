@@ -115,7 +115,7 @@
   
   /* For medium devices */
   @media screen and (max-width: 768px) {
-    .contact__containet{
+    .contact__container{
         grid-template-columns: 1fr;
         row-gap: 3rem;
     }
