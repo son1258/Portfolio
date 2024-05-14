@@ -97,6 +97,7 @@ const Contact = () => {
                                 className="contact__form-input"
                                 placeholder="Insert your name" 
                                 autoComplete="name"
+                                required
                             />
                         </div>
 
@@ -109,6 +110,7 @@ const Contact = () => {
                                 className="contact__form-input"
                                 placeholder="Insert your email" 
                                 autoComplete="email"
+                                required
                             />
                         </div>
 
@@ -121,6 +123,7 @@ const Contact = () => {
                                 rows="10"
                                 className="contact__form-input"
                                 placeholder="Write your project"
+                                required
                             ></textarea>
                         </div>
                         <button  className="button button--flex" type="submit">
